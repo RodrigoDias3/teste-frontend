@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head th:replace="~{layout/layout :: head (pageTitle='Clinica')}">
+</head>
+<body>
+<div th:replace="~{layout/layout :: header}"></div>
+
+<div class="container mt-5">
+    <div class="mb-5">
+        <h1 class="display-4 font-weight-bold text-primary">Detalhes da Clínica</h1>
+        <p class="lead text-muted">Informações sobre a clínica e os serviços disponíveis.</p>
+    </div>
+
+    <div class="d-flex justify-content-between align-items-center">
+        <h3>Clínica <span th:text="${clinica_nome}"></span></h3>
+
+        <a th:href="@{/marcar/consulta(clinicaId=${clinica_nome})}"
+           class="btn btn-primary btn-sm">Marcar Consulta</a>
+    </div>
+    <br>
+    <div class="panel panel-default">
+        <div class="panel-heading">
+            <h3 class="panel-title">Médicos da Clínica</h3>
+        </div>
+        <div class="panel-body">
+            <ul class="list-group">
+                <li class="list-group-item" th:each="entry : ${medicos}">
+                    <div class="d-flex justify-content-between align-items-center">
+                        <span>Médico <strong th:text="${entry.key}"></strong> - Especialidade: <span th:text="${entry.value}"></span></span>
+
+                        <a th:href="@{/marcar/consulta(clinicaId=${clinica_nome}, medicoId=${entry.key})}"
+                           class="btn btn-secondary btn-sm">Marcar com este médico</a>
+                    </div>
+                </li>
+            </ul>
+        </div>
+    </div>
+
+</div>
+
+<div th:replace="~{layout/layout :: footer}"></div>
+</body>
+</html>

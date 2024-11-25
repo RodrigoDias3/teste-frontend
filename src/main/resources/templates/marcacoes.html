@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="~{layout/layout :: head (pageTitle='Consultas')}">
+</head>
+<body>
+<div th:replace="~{layout/layout :: header}"></div>
+
+<div class="container">
+    <h2 class="text-center">Consultas do Utilizador</h2>
+
+    <div th:if="${consultasMap.isEmpty()}">
+        <p class="text-center text-muted">Não há consultas disponíveis para este usuário.</p>
+    </div>
+
+    <div th:if="${!consultasMap.isEmpty()}">
+        <div th:each="entry : ${consultasMap}">
+            <h3 th:text="'Clínica: ' + ${entry.key}">Clínica Nome</h3>
+            <table class="table table-striped">
+                <thead>
+                <tr>
+                    <th>Especialidade</th>
+                    <th>ID Marcação</th>
+                    <th>Data e Hora</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr th:each="consulta : ${entry.value}">
+                    <td th:text="${consulta.get('especialidade')}">Especialidade</td>
+                    <td th:text="${consulta.get('idMarcacao')}">ID Marcação</td>
+                    <td th:text="${consulta.get('dataHora')}">Data e Hora</td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+<div th:replace="~{layout/layout :: footer}"></div>
+</body>
+</html>

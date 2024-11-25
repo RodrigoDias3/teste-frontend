@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head th:replace="~{layout/layout :: head (pageTitle='Home')}">
+</head>
+<body>
+<div th:replace="~{layout/layout :: header}"></div>
+
+<div class="container mt-5">
+    <div class="mb-5">
+        <h1 class="display-4 font-weight-bold text-primary">Bem-vindo ao Centro de Clínicas!</h1>
+        <p class="lead text-muted">O portal para serviços de saúde de confiança.</p>
+    </div>
+
+    <div class="col-md-6">
+        <div th:if="${session.name} != null">
+            <div class="panel panel-default">
+                <div class="panel-body">
+                    <h2 class="panel-title mb-3">Olá, <span th:text="${session.name}"></span> <span th:text="${session.lastName}"></span>!</h2>
+                    <br>
+                    <p class="text-muted">É bom tê-lo de volta! Explore os nossos serviços e marque consultas de forma fácil e rápida.</p>
+                </div>
+            </div>
+            <div class="mt-4">
+                <a th:href="@{/marcar/consulta}" class="btn btn-primary">Marcar Consulta</a>
+            </div>
+        </div>
+
+        <div th:if="${session.name} == null">
+            <div class="panel panel-default">
+                <div class="panel-body">
+                    <h2 class="panel-title mb-3">Bem-vindo, visitante!</h2>
+                    <p class="text-muted">Aceda à sua conta para aproveitar todos os nossos serviços.</p>
+                    <a style="margin-top: 20px;" th:href="@{/login}" class="btn btn-primary btn-lg mb-3 px-4">Fazer Login</a>
+                    <p style="margin-top: 20px;">Ainda não tem conta? <a th:href="@{/signup}" class="font-weight-bold text-primary">Registe-se aqui</a>.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div th:replace="~{layout/layout :: footer}"></div>
+</body>
+</html>
